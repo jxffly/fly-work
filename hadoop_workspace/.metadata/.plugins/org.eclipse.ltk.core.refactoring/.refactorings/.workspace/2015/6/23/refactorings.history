@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;Hadoop2.6_002_SubmitJob&apos;" deleteContents="true" description="Delete resource &apos;Hadoop2.6_002_SubmitJob&apos;" element1="/Hadoop2.6_002_SubmitJob" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1433294873842"/>
+</session>

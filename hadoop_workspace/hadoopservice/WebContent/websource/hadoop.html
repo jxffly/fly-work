@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button id="hadoop">进行hadoop分析</button>
+	<button id="getdata">获取分析后的数据</button>
+	<div id="main" style="width: 1000px;height: 600px;margin-left: auto;margin-right: auto;" > </div>
+
+<script type="text/javascript" src="../jstool/echart/echarts.js"></script>
+<script type="text/javascript">
+	
+        // 路径配置
+        require.config({
+            paths: {
+                jquery: '../jstool/jquery-2.1.1',
+                echarts:'../jstool/echart'
+            }
+        });
+        
+        // 使用
+        require(
+            [	
+                'echarts',
+                'echarts/chart/bar',
+                'jquery'// 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+            	$("button").on("click",function(){
+            		if($(this).attr("id")=="getdata"){
+            			doAjax($(this).attr("id"),render);
+            		}else{
+            			doAjax($(this).attr("id"),"change");
+            			$(this).text("正在进行运算");
+            		}
+        			
+        		
+        		});
+        	
+        		
+        		
+        		function doAjax(action,funcName){
+        			var url="http://localhost:8080/hadoopservice/hadoop?action="+action;
+        			$.ajax({
+        				type : "POST",
+        				url : url,
+        				dataType : "json",
+        				success : function(data){
+        					//返回值成功则更新数据，否则不更新数据；
+        					if(funcName==render){
+        						funcName(data);
+        					}
+        					
+        					
+        				}
+        			});
+        			
+        		}
+               
+                
+                function render(data){
+                	 // 基于准备好的dom，初始化echarts图表
+                    var myChart = ec.init(document.getElementById('main'));
+                	 var xArray=[];
+                	 var dataArray=[];
+                	 for(var i=0;i<data.responseData.length;i++){
+                		 xArray.push(data.responseData[i].letter);
+                		 dataArray.push(parseInt(data.responseData[i].count));
+                	 }
+                	
+                	var option = {
+                			 title : {
+                			        text: '字母频数统计分析',
+                			        x:'center'
+                			       
+                			    },
+                            tooltip: {
+                                show: true
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    data : xArray,
+                                    axisLabel : {
+                                        show:true,
+                                        interval: 0,    // {number}
+                                        formatter: '{value}'
+                                        
+                                    }
+                                }
+                              
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value',
+                                    axisLabel : {
+                                        show:true,
+                                        interval: 'auto',    // {number}
+                                       
+                                        
+                                        formatter: function(value){
+                                        	console.log(value);
+                                        	var temval=value;
+                                        	var str=0;
+                                        	if(temval/10000>1){
+                                        		str=temval/10000+'万';
+                                        		temval=temval/10000;
+                                        	}else if(temval/10000>1){
+                                        		str=temval/10000+'亿';
+                                        		
+                                        	}
+                                        	return str;
+                                        }   // Template formatter!
+                                        
+                                    }
+                                }
+                            ],
+                            series : [
+                                {
+                                    "name":"频数",
+                                    "type":"bar",
+                                    itemStyle: {
+                                        normal: {
+                                            color: function(params) {
+                                                // build a color map as your need.
+                                                var colorList = [
+                                                  '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                                                   '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                                                   '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                                                ];
+                                                return colorList[params.dataIndex%colorList.length]
+                                            },
+                                            label: {
+                                                show: true,
+                                                position: 'top',
+                                                formatter: '{b}'
+                                            }
+                                        }
+                                    },
+                                    "data":dataArray
+                                }
+                            ]
+                        };
+                
+                        // 为echarts对象加载数据 
+                        myChart.setOption(option); 
+                }
+            }
+        );
+</script>
+</body>
+</html>

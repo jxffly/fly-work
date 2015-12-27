@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/wordcount/src/org/hadoop/temperature/NewTempearture.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.hadoop.temperature.NewTempearture"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="hdfs://10.51.101.57:9000/user/grid/temprature/data&#13;&#10;hdfs://10.51.101.57:9000/user/grid/temprature/output-counters"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="wordcount"/>
+</launchConfiguration>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hadoop Demo</title>
+<link rel="stylesheet" href="../jstool/bootstrap/css/bootstrap.css"></link>
+<link rel="stylesheet" href="../jstool/jquery-ui/jquery-ui.css"></link>
+</head>
+<body>
+	<div class="container">
+		<h1>Search Demo</h1>
+		<div class="well">
+			<form>
+				<label>Search</label> <input id="query"></input>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript" src="../jstool/jquery/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="../jstool/jquery-ui/jquery-ui.js"></script>
+	<script type="text/javascript"
+		src="../jstool/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#query").autocomplete({
+				source:function(request,response){
+					$.ajax({
+						url:"ajax/sug.do",
+						dataType:"json",
+						data:{
+							query:request.term,
+							data:"aaa"
+						},
+						success:function(data){
+							response($.map(data.list2,function(item){
+								return {value:item}; 
+							}));
+						}
+						
+					})
+				},
+				miniLength:1
+			
+			}); 
+		});
+	</script>
+</body>
+</html>

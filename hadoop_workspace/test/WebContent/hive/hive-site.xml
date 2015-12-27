@@ -1,0 +1,33 @@
+<?xml version="1.0"?>  
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>  
+   
+<configuration>  
+  
+<property>  
+  <name>hive.metastore.warehouse.dir</name>  
+  <value>/user/grid/warehouse</value>  
+</property>  
+   
+<property>  
+  <name>javax.jdo.option.ConnectionURL</name>  
+  <value>jdbc:mysql://10.52.7.11:3306/hive_remote?createDatabaseIfNotExist=true</value>  
+</property>  
+   
+<property>  
+  <name>javax.jdo.option.ConnectionDriverName</name>  
+  <value>com.mysql.jdbc.Driver</value>  
+</property>  
+   
+<property>  
+  <name>javax.jdo.option.ConnectionUserName</name>  
+  <value>hive</value>  
+</property>  
+   
+<property>  
+  <name>javax.jdo.option.ConnectionPassword</name>  
+  <value>hive</value>  
+</property>  
+  
+ 
+  
+</configuration> 

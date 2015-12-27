@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button id="createtable">创建HBASE表</button>
+	<button id="addrecord">增加HBASE表记录</button>
+	<button id="query">查询一条记录</button>
+	<button id="queryall">查询所有记录</button>
+	<button id="deleterecord">删除HBASE表记录</button>
+	
+	<button id="deletetable">删除HBASE表</button>
+	
+	<button id="dohadoop">进行hadoop操作</button>
+	<button id="hadoophbase">进行hadoop-hbase操作</button>
+
+<script type="text/javascript" src="../jstool/jquery-2.1.1.js"></script>
+<script type="text/javascript">
+		$("button").on("click",function(){
+			doAjax($(this).attr("id"));
+		
+		});
+	
+		
+		
+		function doAjax(action){
+			var url="http://localhost:8080/hadoopweb/Hadoopservlet?action="+action;
+			$.ajax({
+				type : "POST",
+				url : url,
+				dataType : "json",
+				success : function(data){
+					//返回值成功则更新数据，否则不更新数据；
+					alert(data);
+					
+				}
+			});
+			
+		}
+</script>
+</body>
+</html>
